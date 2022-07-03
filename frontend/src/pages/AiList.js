@@ -1,6 +1,11 @@
+import NavigationBar from "../components/NavigationBar";
+
 const AiList = () => { 
   return (
-    <div>ai 리스트</div>
+    <>
+      <NavigationBar/>
+      <div>ai 리스트</div>
+    </> 
   );
 }
 

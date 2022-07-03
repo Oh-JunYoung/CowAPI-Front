@@ -1,6 +1,11 @@
+import NavigationBar from "../components/NavigationBar";
+
 const Login = () => { 
   return (
-    <div>로그인</div>
+    <>
+      <NavigationBar />
+      <div>로그인</div>
+    </>
   );
 }
 

@@ -1,6 +1,11 @@
+import NavigationBar from "../components/NavigationBar";
+
 const DashBoard = () => { 
   return (
-    <div>대시보드</div>
+    <>
+      <NavigationBar/>
+      <div>대시보드</div>
+    </>
   );
 }
 

@@ -1,9 +1,13 @@
 import { useParams } from "react-router-dom";
+import NavigationBar from "../components/NavigationBar";
 
 const QnaList = (props) => { 
   //console.log(useParams().page)
   return (
-    <div>질문리스트</div>
+    <>
+      <NavigationBar />
+      <div>질문리스트</div>
+    </>
   );
 }
 

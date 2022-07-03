@@ -1,6 +1,11 @@
+import NavigationBar from "../components/NavigationBar";
+
 const MyPage = () => { 
   return (
-    <div>마이페이지</div>
+    <>
+      <NavigationBar/>
+      <div>마이페이지</div>
+    </>
   );
 }
 

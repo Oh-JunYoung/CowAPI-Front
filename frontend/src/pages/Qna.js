@@ -1,6 +1,11 @@
+import NavigationBar from "../components/NavigationBar";
+
 const Qna = () => { 
   return (
-    <div>질문세부</div>
+    <>
+      <NavigationBar/>
+      <div>질문세부</div>
+    </>
   );
 }
 

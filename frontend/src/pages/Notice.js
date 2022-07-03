@@ -1,6 +1,11 @@
+import NavigationBar from "../components/NavigationBar";
+
 const Notice = () => { 
   return (
-    <div>공지세부</div>
+    <>
+      <NavigationBar/>
+      <div>공지세부</div>
+    </>
   );
 }
 

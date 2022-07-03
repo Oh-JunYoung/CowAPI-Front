@@ -1,6 +1,11 @@
+import NavigationBar from "../components/NavigationBar";
+
 const NoticeList = () => { 
   return (
-    <div>공지리스트</div>
+    <>
+      <NavigationBar/>
+      <div>공지리스트</div>
+    </>
   );
 }
 
