@@ -12,6 +12,9 @@ import Notice from "./pages/Notice";
 import AiList from "./pages/AiList";
 import Ai from "./pages/Ai";
 
+// css
+import './reset.css';
+
 // components
 
 function App() {
