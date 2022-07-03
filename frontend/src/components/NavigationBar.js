@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const NavigationBar = () => { 
-  const user = 1;
+  const user = localStorage.getItem("jwt") === null ? 0 : 1;
   const prefix = useLocation().pathname.split("/").length === 3 ? '../' : ''; // path에 따라 이미지 상대경로 설정
   return (
     <NavContainer>
@@ -14,7 +14,10 @@ const NavigationBar = () => {
         <Icons src={`${prefix}dashboard.png`} />
         {user === 1 ? <Icons src={`${prefix}notice.png`} /> : <></>}
         {user === 1 ? <Icons src={`${prefix}qna.png`} /> : <></>}
-        <Icons src={`${prefix}mypage.png`} />
+        <Icons src={`${prefix}mypage.png`} onClick={() => { 
+          const path = user === 1 ? "/mypage" : "/login";
+          window.location.href = path;
+        } } />
         <Icons src={`${prefix}exit.png`}/>
       </LogoContainer>
     </NavContainer>
