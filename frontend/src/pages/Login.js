@@ -11,7 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("jwt") !== null) {
-      navigate("/");
+      navigate(-1);
     }
   });
 
