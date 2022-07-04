@@ -20,7 +20,7 @@ const AiList = () => {
   }, []);
 
   const handleClick = (name) => {
-    navigate(`Ai/${name}`, { state: { name } });
+    navigate(`./${name}`, { state: { name } });
   };
 
   return (

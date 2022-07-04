@@ -21,7 +21,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<AiList />} />
+        <Route path="/" element={<DashBoard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/qna-list/:page" element={<QnaList />} />
@@ -35,7 +35,7 @@ function App() {
           element={<Notice /> /*id 가 -1이면 작성 아니면 수정*/}
         />
         <Route path="/ai" element={<AiList />} />
-        <Route path="/ai/:id" element={<Ai />} />
+        <Route path="/ai/:name" element={<Ai />} />
       </Routes>
     </div>
   );
