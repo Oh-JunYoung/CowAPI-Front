@@ -1,21 +1,17 @@
 import styled from "styled-components";
 
-export const Button = (props) => { 
-  return (
-    <Btn onClick={props.func}> {props.name} </Btn>
-  );
-}
+export const Button = (props) => {
+  return <Btn onClick={props.func}> {props.name} </Btn>;
+};
 
-export const Title = (props) => { 
-  return (
-    <Tit>{props.name}</Tit>
-  );
-}
+export const Title = (props) => {
+  return <Tit>{props.name}</Tit>;
+};
 
 export const Container = styled.div`
-  display : flex;
-  flex-direction : column;
-  margin-top : 20px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
   margin-left: 40px;
   margin-right: 40px;
   margin-bottom : 20px;
@@ -53,7 +49,6 @@ export const ButtonContainer = styled.div`
   margin-top : 20px;
   min-height : 38px;
 `
-
 export const PageContainer = (props) => { 
   const cur = props.cur;
   const start = parseInt(props.cur / 5) * 5 + 1 - (props.cur % 5 === 0 ? 5 : 0);
@@ -89,22 +84,22 @@ export const PageContainer = (props) => {
 }
 
 const Btn = styled.div`
-  display : flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  height : 36px;
-  width : 150px;
+  height: 36px;
+  width: 150px;
   border: black 1px solid;
-  font-size : 25px;
-`
+  font-size: 25px;
+`;
 
 const Tit = styled.div`
-  display : flex;
+  display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   font-size: 40px;
-  width: 100px;
-  margin-top : 20px;
+  /* width: 100px; */
+  margin-top: 20px;
   margin-left: 20px;
 `
 

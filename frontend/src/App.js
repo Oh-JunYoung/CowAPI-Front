@@ -13,7 +13,7 @@ import AiList from "./pages/AiList";
 import Ai from "./pages/Ai";
 
 // css
-import './reset.css';
+import "./reset.css";
 
 // components
 
@@ -25,11 +25,17 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/qna-list/:page" element={<QnaList />} />
-        <Route path="/qna/:id" element={<Qna />/*id 가 -1이면 작성 아니면 수정*/} /> 
+        <Route
+          path="/qna/:id"
+          element={<Qna /> /*id 가 -1이면 작성 아니면 수정*/}
+        />
         <Route path="/notice-list/:page" element={<NoticeList />} />
-        <Route path="/notice/:id" element={<Notice />/*id 가 -1이면 작성 아니면 수정*/} />
+        <Route
+          path="/notice/:id"
+          element={<Notice /> /*id 가 -1이면 작성 아니면 수정*/}
+        />
         <Route path="/ai" element={<AiList />} />
-        <Route path="/ai/:id" element={<Ai />} />
+        <Route path="/ai/:name" element={<Ai />} />
       </Routes>
     </div>
   );
