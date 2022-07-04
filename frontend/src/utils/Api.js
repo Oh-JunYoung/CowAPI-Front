@@ -1,5 +1,5 @@
 const url = process.env.REACT_APP_URL;
-const Authorization = localStorage.getItem("jwt");
+const Authorization = 'Bearer ' + localStorage.getItem("jwt");
 
 export const signUp = async (email, password) => {
   console.log(url);
@@ -42,3 +42,27 @@ export const signIn = async (email, password) => {
     window.location.href = "/";
   }
 };
+
+export const getQnaList = async (page) => { 
+  const res = await fetch(url + '/qna/list/' + page, {
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Authorization" : `${Authorization}`
+    }
+  });
+  const data = await res.json();
+  return data;
+}
+
+export const getNoticeList = async (page) => { 
+  const res = await fetch(url + '/notice/list/' + page, {
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Authorization" : `${Authorization}`
+    }
+  });
+  const data = await res.json();
+  return data;
+}
