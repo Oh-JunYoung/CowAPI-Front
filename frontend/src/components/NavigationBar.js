@@ -7,13 +7,13 @@ const NavigationBar = () => {
   return (
     <NavContainer>
       <LogoContainer>
-        <img src={`${prefix}logo.png`} alt="logo"/>
-        <img src={`${prefix}domain.png`} alt="domain"/>
+        <img src={`${prefix}logo.png`} alt="logo" onClick={() => { window.location.href = "/"}} />
+        <img src={`${prefix}domain.png`} alt="domain" onClick={() => { window.location.href = "/" }} />
       </LogoContainer>
       <LogoContainer>
-        <Icons src={`${prefix}dashboard.png`} />
-        {user === 1 ? <Icons src={`${prefix}notice.png`} /> : <></>}
-        {user === 1 ? <Icons src={`${prefix}qna.png`} /> : <></>}
+        <Icons src={`${prefix}dashboard.png`} onClick={() => { window.location.href = "/" }} />
+        {user === 1 ? <Icons src={`${prefix}notice.png`} onClick={() => { window.location.href = "/notice-list/1" }} /> : <></>}
+        {user === 1 ? <Icons src={`${prefix}qna.png`} onClick={() => { window.location.href = "/qna-list/1" }} /> : <></>}
         <Icons src={`${prefix}mypage.png`} onClick={() => { 
           const path = user === 1 ? "/mypage" : "/login";
           window.location.href = path;
