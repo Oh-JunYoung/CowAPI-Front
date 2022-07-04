@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Button from "../components/Button";
+import { Button } from "../components/Component";
 
 import NavigationBar from "../components/NavigationBar";
 
 import { signIn, signUp } from "../utils/Api";
 
 const Login = () => { 
-  if (localStorage.getItem("jwt") !== null) { 
-    window.location.href = "/"; 
-  }
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("jwt") !== null) {
+      navigate("/");
+    }
+  });
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
