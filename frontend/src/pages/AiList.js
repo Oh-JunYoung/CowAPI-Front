@@ -34,7 +34,7 @@ const AiList = () => {
         </TableContainer>
         <TableContainer>
           <TableTitle>NLP</TableTitle>
-          <AiTable lists={values.nlp} />
+          <AiTable lists={values.nlp} handleClick={handleClick} />
         </TableContainer>
       </Container>
     </>
