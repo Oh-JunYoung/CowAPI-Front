@@ -1,9 +1,13 @@
 const url = process.env.REACT_APP_URL;
+const Authorization = localStorage.getItem("jwt");
 
 export const signUp = async (email, password) => {
   console.log(url);
   const res = await fetch(url + '/signup', {
     method: "POST",
+    headers: {
+      "Content-Type":"application/json"
+    },
     body: JSON.stringify({
       email,
       password
