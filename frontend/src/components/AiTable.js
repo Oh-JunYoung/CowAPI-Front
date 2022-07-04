@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const AiTable = ({ lists }) => {
+export const AiTable = ({ lists, handleClick }) => {
   return (
     <Block>
       <TableStyles>
@@ -13,7 +13,7 @@ export const AiTable = ({ lists }) => {
         </thead>
         <tbody>
           {lists.map((el, index) => (
-            <tr key={index}>
+            <tr key={index} onClick={() => handleClick(el.name)}>
               <td>{el.name}</td>
               <td>{el.responseTime}</td>
               <td>{el.accuracy}</td>
@@ -74,6 +74,27 @@ const TableStyles = styled.table`
     display: flex;
     justify-content: center;
     font-weight: 400;
-    border-bottom: 1px solid #ececec;
+    /* border-bottom: 1px solid #ececec; */
   }
 `;
+
+export const OneTable = (props) => {
+  return (
+    <Block>
+      <TableStyles>
+        <thead>
+          <tr>
+            <th>요청 URI</th>
+            <th>HTTP METHOD</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{props.requestURI}</td>
+            <td>{props.method}</td>
+          </tr>
+        </tbody>
+      </TableStyles>
+    </Block>
+  );
+};

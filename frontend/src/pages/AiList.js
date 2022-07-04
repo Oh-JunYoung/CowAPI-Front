@@ -3,12 +3,14 @@ import { Title } from "../components/Component";
 import NavigationBar from "../components/NavigationBar";
 import styled from "styled-components";
 import { AiTable } from "../components/AiTable";
+import { useNavigate } from "react-router-dom";
 
 const AiList = () => {
   const [values, setValues] = useState({
     vision: [],
     nlp: [],
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     setValues({
@@ -17,6 +19,10 @@ const AiList = () => {
     });
   }, []);
 
+  const handleClick = (name) => {
+    navigate(`Ai/${name}`, { state: { name } });
+  };
+
   return (
     <>
       <NavigationBar />
@@ -24,7 +30,7 @@ const AiList = () => {
       <Container>
         <TableContainer>
           <TableTitle>Computer Vision</TableTitle>
-          <AiTable lists={values.vision} />
+          <AiTable lists={values.vision} handleClick={handleClick} />
         </TableContainer>
         <TableContainer>
           <TableTitle>NLP</TableTitle>
@@ -55,7 +61,7 @@ const TableTitle = styled.div`
 
 export default AiList;
 
-const dummyAiList = [
+export const dummyAiList = [
   {
     field: "vision",
     name: "asdqfd",
