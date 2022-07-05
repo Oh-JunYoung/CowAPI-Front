@@ -13,8 +13,8 @@ export const signUp = async (email, password) => {
       password
     })
   });
-  if (res.status === 409) {
-    alert("이미 존재하는 이메일입니다.")
+  if (res.status % 100 == 4) {
+    alert("권한이 없습니다.");
   } else {
     const data = await res.json();
     alert("회원가입이 완료되었습니다. 로그인 후 이용가능합니다.");
@@ -32,8 +32,9 @@ export const signIn = async (email, password) => {
       password
     })
   });
-  if (res.status === 409) {
-    alert("존재하지 않거나 비밀번호가 다릅니다.")
+  if (res.status % 100 == 4) {
+    console.log(res)
+    alert("권한이 없습니다.");
   } else {
     const data = await res.json();
     localStorage.setItem("jwt", data.authorization);
@@ -104,7 +105,7 @@ export const updateQna = async (id, title, content) => {
       content
     })
   });
-  if (res.status === 401) {
+  if (res.status % 100 == 4) {
     alert("권한이 없습니다.");
   } else {
     window.location.href = "/qna-list/1";
@@ -123,7 +124,7 @@ export const updateNotice = async (id, title, content) => {
       content
     })
   });
-  if (res.status === 401) {
+  if (res.status % 100 == 4) {
     alert("권한이 없습니다.");
   } else {
     window.location.href = "/notice-list/1";
@@ -143,7 +144,7 @@ export const createQna = async (title, content) => {
       content
     })
   });
-  if (res.status === 401) {
+  if (res.status % 100 == 4) {
     alert("권한이 없습니다.");
   } else {
     window.location.href = "/qna-list/1";
@@ -162,7 +163,7 @@ export const createNotice = async (title, content) => {
       content
     })
   });
-  if (res.status === 401) {
+  if (res.status % 100 == 4) {
     alert("권한이 없습니다.");
   } else {
     window.location.href = "/notice-list/1";
@@ -177,7 +178,7 @@ export const deleteQna = async (id) => {
       "Authorization" : `${Authorization}`
     }
   });
-  if (res.state === 401) {
+  if (res.status % 100 == 4) {
     alert("권한이 없습니다.");
   } else { 
     window.location.href = "/qna-list/1";
@@ -192,7 +193,7 @@ export const deleteNotice = async (id) => {
       "Authorization" : `${Authorization}`
     }
   });
-  if (res.state === 401) {
+  if (res.status % 100 == 4) {
     alert("권한이 없습니다.");
   } else { 
     window.location.href = "/notice-list/1";
@@ -222,7 +223,7 @@ export const updateMyInfo = async (password) => {
       password
     })
   });
-  if (res.status === 401) {
+  if (res.status % 100 == 4) {
     alert("권한이 없습니다.");
   } else {
     window.location.href = "/";
@@ -237,7 +238,7 @@ export const deleteMyInfo = async () => {
       "Authorization" : `${Authorization}`
     }
   });
-  if (res.status === 401) {
+  if (res.status % 100 == 4) {
     alert("권한이 없습니다.");
   } else {
     localStorage.clear();
