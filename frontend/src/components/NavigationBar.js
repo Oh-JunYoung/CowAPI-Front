@@ -12,13 +12,17 @@ const NavigationBar = () => {
       </LogoContainer>
       <LogoContainer>
         <Icons src={`${prefix}dashboard.png`} onClick={() => { window.location.href = "/" }} />
+        {user === 1 ? <Icons src={`${prefix}ai.png`} onClick={() => { window.location.href = "/ai" }} /> : <></>}
         {user === 1 ? <Icons src={`${prefix}notice.png`} onClick={() => { window.location.href = "/notice-list/1" }} /> : <></>}
         {user === 1 ? <Icons src={`${prefix}qna.png`} onClick={() => { window.location.href = "/qna-list/1" }} /> : <></>}
         <Icons src={`${prefix}mypage.png`} onClick={() => { 
           const path = user === 1 ? "/mypage" : "/login";
           window.location.href = path;
         } } />
-        <Icons src={`${prefix}exit.png`}/>
+        <Icons src={`${prefix}exit.png`} onClick={() => { 
+          localStorage.clear();
+          window.location.href = "/";
+        } } />
       </LogoContainer>
     </NavContainer>
   );
