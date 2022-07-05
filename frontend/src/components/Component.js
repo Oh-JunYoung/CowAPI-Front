@@ -111,6 +111,32 @@ export const DetailContainer = (props) => {
   );
 }
 
+// mypage
+export const MyPageContainer = (props) => { 
+  return (
+    <>
+      <InputContainer>
+        <TextBox>email</TextBox>
+        <ReadOnlyBox>{ props.email}</ReadOnlyBox>
+      </InputContainer>
+      <InputContainer>
+        <TextBox>password</TextBox>
+        <InputBox onChange={(e) => { 
+          props.setPassword(e.target.value);
+        } } />
+      </InputContainer>
+      <div style={{height:"100px"}}/>
+      <InputContainer>
+        <TextBox>가입날짜</TextBox>
+        <ReadOnlyBox>{ props.createdAt.substr(0,10)}</ReadOnlyBox>
+      </InputContainer>
+      <InputContainer>
+        <TextBox>★ Secret key</TextBox>
+        <ReadOnlyBox>{ props.secretKey}</ReadOnlyBox>
+      </InputContainer>
+    </>
+  );
+}
 
 
 const Btn = styled.div`
@@ -202,10 +228,17 @@ const InputContainer = styled.div`
 `
 
 const TextBox = styled.div`
+  min-width: 180px;
   font-size : 30px;
 `
 const InputBox = styled.input`
   width : 70%;
+`
+
+const ReadOnlyBox = styled.div`
+  width : 70%;
+  text-align: center;
+  font-size: x-large;
 `
 
 const ContentBox = styled.textarea`
