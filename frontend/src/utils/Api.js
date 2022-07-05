@@ -14,7 +14,7 @@ export const signUp = async (email, password) => {
     })
   });
   if (res.status % 100 == 4) {
-    alert("권한이 없습니다.");
+    alert(await res.json().message);
   } else {
     const data = await res.json();
     alert("회원가입이 완료되었습니다. 로그인 후 이용가능합니다.");
@@ -33,8 +33,7 @@ export const signIn = async (email, password) => {
     })
   });
   if (res.status % 100 == 4) {
-    console.log(res)
-    alert("권한이 없습니다.");
+    alert(await res.json().message);
   } else {
     const data = await res.json();
     localStorage.setItem("jwt", data.authorization);
@@ -53,6 +52,9 @@ export const getQnaList = async (page) => {
       "Authorization" : `${Authorization}`
     }
   });
+  if (res.status % 100 == 4) {
+    alert(await res.json().message);
+  }
   const data = await res.json();
   return data;
 }
@@ -65,6 +67,9 @@ export const getNoticeList = async (page) => {
       "Authorization" : `${Authorization}`
     }
   });
+  if (res.status % 100 == 4) {
+    alert(await res.json().message);
+  }
   const data = await res.json();
   return data;
 }
@@ -77,6 +82,9 @@ export const getQnaDetail = async (id) => {
       "Authorization" : `${Authorization}`
     }
   });
+  if (res.status % 100 == 4) {
+    alert(await res.json().message);
+  }
   const data = await res.json();
   return data;
 }
@@ -106,7 +114,7 @@ export const updateQna = async (id, title, content) => {
     })
   });
   if (res.status % 100 == 4) {
-    alert("권한이 없습니다.");
+    alert(await res.json().message);
   } else {
     window.location.href = "/qna-list/1";
   }
@@ -125,7 +133,7 @@ export const updateNotice = async (id, title, content) => {
     })
   });
   if (res.status % 100 == 4) {
-    alert("권한이 없습니다.");
+    alert(await res.json().message);
   } else {
     window.location.href = "/notice-list/1";
   }
@@ -145,7 +153,7 @@ export const createQna = async (title, content) => {
     })
   });
   if (res.status % 100 == 4) {
-    alert("권한이 없습니다.");
+    alert(await res.json().message);
   } else {
     window.location.href = "/qna-list/1";
   }
@@ -164,7 +172,7 @@ export const createNotice = async (title, content) => {
     })
   });
   if (res.status % 100 == 4) {
-    alert("권한이 없습니다.");
+    alert(await res.json().message);
   } else {
     window.location.href = "/notice-list/1";
   }
@@ -179,7 +187,7 @@ export const deleteQna = async (id) => {
     }
   });
   if (res.status % 100 == 4) {
-    alert("권한이 없습니다.");
+    alert(await res.json().message);
   } else { 
     window.location.href = "/qna-list/1";
   }
@@ -194,7 +202,7 @@ export const deleteNotice = async (id) => {
     }
   });
   if (res.status % 100 == 4) {
-    alert("권한이 없습니다.");
+    alert(await res.json().message);
   } else { 
     window.location.href = "/notice-list/1";
   }
@@ -224,7 +232,7 @@ export const updateMyInfo = async (password) => {
     })
   });
   if (res.status % 100 == 4) {
-    alert("권한이 없습니다.");
+    alert(await res.json().message);
   } else {
     window.location.href = "/";
   }
@@ -239,7 +247,7 @@ export const deleteMyInfo = async () => {
     }
   });
   if (res.status % 100 == 4) {
-    alert("권한이 없습니다.");
+    alert(await res.json().message);
   } else {
     localStorage.clear();
     window.location.href = "/";
@@ -254,6 +262,39 @@ export const updateSecretKey = async () => {
       "Authorization" : `${Authorization}`
     }
   });
+  if (res.status % 100 == 4) {
+    alert(await res.json().message);
+  }
+  const data = await res.json();
+  return data;
+}
+
+export const getAiList = async () => { 
+  const res = await fetch(url + '/ais', {
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Authorization" : `${Authorization}`
+    }
+  });
+  if (res.status % 100 == 4) {
+    alert(await res.json().message);
+  }
+  const data = await res.json();
+  return data;
+}
+
+export const getAiOne = async (name) => { 
+  const res = await fetch(url + '/ai/' + name, {
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Authorization" : `${Authorization}`
+    }
+  });
+  if (res.status % 100 == 4) {
+    alert(await res.json().message);
+  }
   const data = await res.json();
   return data;
 }
