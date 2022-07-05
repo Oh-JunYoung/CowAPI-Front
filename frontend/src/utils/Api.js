@@ -93,7 +93,7 @@ export const getNoticeDetail = async (id) => {
 }
 
 export const updateQna = async (id, title, content) => { 
-const res = await fetch(url + '/qna/' + id, {
+  const res = await fetch(url + '/qna/' + id, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -112,7 +112,7 @@ const res = await fetch(url + '/qna/' + id, {
 }
 
 export const updateNotice = async (id, title, content) => { 
-const res = await fetch(url + '/notice/' + id, {
+  const res = await fetch(url + '/notice/' + id, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -132,7 +132,7 @@ const res = await fetch(url + '/notice/' + id, {
 
 
 export const createQna = async (title, content) => { 
-const res = await fetch(url + '/qna', {
+  const res = await fetch(url + '/qna', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -151,7 +151,7 @@ const res = await fetch(url + '/qna', {
 }
 
 export const createNotice = async (title, content) => { 
-const res = await fetch(url + '/notice', {
+  const res = await fetch(url + '/notice', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -197,4 +197,62 @@ export const deleteNotice = async (id) => {
   } else { 
     window.location.href = "/notice-list/1";
   }
+}
+
+export const getMyInfo = async () => { 
+  const res = await fetch(url + '/mypage', {
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Authorization" : `${Authorization}`
+    }
+  });
+  const data = await res.json();
+  return data;
+}
+
+export const updateMyInfo = async (password) => { 
+  const res = await fetch(url + '/user', {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization" : `${Authorization}`
+    },
+    body: JSON.stringify({
+      password
+    })
+  });
+  if (res.status === 401) {
+    alert("권한이 없습니다.");
+  } else {
+    window.location.href = "/";
+  }
+}
+
+export const deleteMyInfo = async () => { 
+  const res = await fetch(url + '/user', {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization" : `${Authorization}`
+    }
+  });
+  if (res.status === 401) {
+    alert("권한이 없습니다.");
+  } else {
+    localStorage.clear();
+    window.location.href = "/";
+  }
+}
+
+export const updateSecretKey = async () => { 
+  const res = await fetch(url + '/reissuance', {
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Authorization" : `${Authorization}`
+    }
+  });
+  const data = await res.json();
+  return data;
 }
