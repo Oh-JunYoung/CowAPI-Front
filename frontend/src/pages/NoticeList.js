@@ -14,17 +14,17 @@ const NoticeList = () => {
   });
 
   const [page, setPage] = useState(useParams().page);
-  //const [list, setList] = useState([]);
-  //const [last, setLast] = useState(0);
+  const [list, setList] = useState([]);
+  const [last, setLast] = useState(0);
   useEffect(() => {
     const getList = async () => {
       const data = await getNoticeList(page);
-      if (data.lastPage < page) { 
+      if (data.lastPage/5 + 1 < page) { 
         alert("게시물이 존재하지 않습니다.");
         navigate(-1);
       }
-      //setLast(data.lastPage);
-      //setList(data.qnas);
+      setLast(parseInt(data.lastPage/5)+1);
+      setList(data.notices);
     }
     getList();
   }, []);
@@ -34,9 +34,9 @@ const NoticeList = () => {
       <NavigationBar />
       <Title name="공지"/>
       <Container>
-        <BoardContainer list={dummy} />
+        <BoardContainer list={list} path="notice"/>
         <ButtonContainer justify="flex-end">
-          { localStorage.getItem("admin") == '1' ? <Button name="작성" /> : <></>}
+          { localStorage.getItem("admin") == '1' ? <Button name="작성" func={() => { window.location.href='/notice/-1'}}/> : <></>}
         </ButtonContainer>
         <PageContainer last={last} cur={page} />
       </Container>
@@ -45,14 +45,3 @@ const NoticeList = () => {
 }
 
 export default NoticeList;
-
-const dummy = [
-  {
-    id: "1",
-    title: "wqer",
-    updateAt: "asdf",
-    email : "qwer"
-  },
-]
-
-const last = 1;
