@@ -97,13 +97,13 @@ export const DetailContainer = (props) => {
     <>
       <InputContainer>
         <TextBox>제목</TextBox>
-        <InputBox value={props.title} onChange={(e) => { 
+        <InputBox value={props.title} readOnly={props.readOnly} onChange={(e) => { 
           props.setTitle(e.target.value);
         } } />
       </InputContainer>
       <InputContainer>
         <TextBox>내용</TextBox>
-        <ContentBox value={props.content} onChange={(e) => { 
+        <ContentBox value={props.content} readOnly={props.readOnly} onChange={(e) => { 
           props.setContent(e.target.value);
         } } />
       </InputContainer>

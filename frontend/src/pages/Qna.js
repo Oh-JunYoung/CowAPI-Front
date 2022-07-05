@@ -27,7 +27,7 @@ const Qna = () => {
       <NavigationBar />
       <Title name="QnA" />
       <Container>
-        <DetailContainer title={title} content={content} setTitle={setTitle} setContent={setContent} />
+        <DetailContainer title={title} content={content} setTitle={setTitle} setContent={setContent} readOnly={ (id == -1 || email == userEmail) ? false : true}/>
         <ButtonContainer justify="flex-end">
           {
             id != -1 ?
