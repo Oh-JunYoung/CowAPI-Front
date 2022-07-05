@@ -39,6 +39,7 @@ export const signIn = async (email, password) => {
     localStorage.setItem("jwt", data.authorization);
     const isAdmin = data.isAdmin ? 1 : 0;
     localStorage.setItem("admin", isAdmin);
+    localStorage.setItem("user", email);
     window.location.href = "/";
   }
 };
@@ -65,4 +66,135 @@ export const getNoticeList = async (page) => {
   });
   const data = await res.json();
   return data;
+}
+
+export const getQnaDetail = async (id) => { 
+  const res = await fetch(url + '/qna/' + id, {
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Authorization" : `${Authorization}`
+    }
+  });
+  const data = await res.json();
+  return data;
+}
+
+export const getNoticeDetail = async (id) => { 
+  const res = await fetch(url + '/notice/' + id, {
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      "Authorization" : `${Authorization}`
+    }
+  });
+  const data = await res.json();
+  return data;
+}
+
+export const updateQna = async (id, title, content) => { 
+const res = await fetch(url + '/qna/' + id, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization" : `${Authorization}`
+    },
+    body: JSON.stringify({
+      title,
+      content
+    })
+  });
+  if (res.status === 401) {
+    alert("권한이 없습니다.");
+  } else {
+    window.location.href = "/qna-list/1";
+  }
+}
+
+export const updateNotice = async (id, title, content) => { 
+const res = await fetch(url + '/notice/' + id, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization" : `${Authorization}`
+    },
+    body: JSON.stringify({
+      title,
+      content
+    })
+  });
+  if (res.status === 401) {
+    alert("권한이 없습니다.");
+  } else {
+    window.location.href = "/notice-list/1";
+  }
+}
+
+
+export const createQna = async (title, content) => { 
+const res = await fetch(url + '/qna', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization" : `${Authorization}`
+    },
+    body: JSON.stringify({
+      title,
+      content
+    })
+  });
+  if (res.status === 401) {
+    alert("권한이 없습니다.");
+  } else {
+    window.location.href = "/qna-list/1";
+  }
+}
+
+export const createNotice = async (title, content) => { 
+const res = await fetch(url + '/notice', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization" : `${Authorization}`
+    },
+    body: JSON.stringify({
+      title,
+      content
+    })
+  });
+  if (res.status === 401) {
+    alert("권한이 없습니다.");
+  } else {
+    window.location.href = "/notice-list/1";
+  }
+}
+
+export const deleteQna = async (id) => { 
+  const res = await fetch(url + '/qna/' + id, {
+    method: "DELETE",
+    headers: {
+      "Content-Type":"application/json",
+      "Authorization" : `${Authorization}`
+    }
+  });
+  if (res.state === 401) {
+    alert("권한이 없습니다.");
+  } else { 
+    window.location.href = "/qna-list/1";
+  }
+}
+
+export const deleteNotice = async (id) => { 
+  const res = await fetch(url + '/notice/' + id, {
+    method: "DELETE",
+    headers: {
+      "Content-Type":"application/json",
+      "Authorization" : `${Authorization}`
+    }
+  });
+  if (res.state === 401) {
+    alert("권한이 없습니다.");
+  } else { 
+    window.location.href = "/notice-list/1";
+  }
 }
