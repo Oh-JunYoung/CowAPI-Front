@@ -4,6 +4,7 @@ import NavigationBar from "../components/NavigationBar";
 import styled from "styled-components";
 import { AiTable } from "../components/AiTable";
 import { useNavigate } from "react-router-dom";
+import { getAiList } from "../utils/Api";
 
 const AiList = () => {
   const [values, setValues] = useState({
@@ -13,10 +14,15 @@ const AiList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setValues({
-      vision: dummyAiList.filter((el) => el.field === "vision"),
-      nlp: dummyAiList.filter((el) => el.field === "nlp"),
-    });
+    const getAis = async () => { 
+      const data = await getAiList();
+      setValues({
+        vision: data.aiList.filter((el) => el.field === "vision"),
+        nlp: data.aiList.filter((el) => el.field === "nlp"),
+      });
+    }
+
+    getAis();
   }, []);
 
   const handleClick = (name) => {
@@ -60,72 +66,3 @@ const TableTitle = styled.div`
 `;
 
 export default AiList;
-
-export const dummyAiList = [
-  {
-    field: "vision",
-    name: "asdqfd",
-    responseTime: 1,
-    accuracy: 1,
-  },
-  {
-    field: "vision",
-    name: "asdd",
-    responseTime: 1,
-    accuracy: 1,
-  },
-  {
-    field: "vision",
-    name: "a213sd",
-    responseTime: 1,
-    accuracy: 1,
-  },
-  {
-    field: "vision",
-    name: "as15rr2d",
-    responseTime: 1,
-    accuracy: 1,
-  },
-  {
-    field: "vision",
-    name: "a1wesd",
-    responseTime: 1,
-    accuracy: 1,
-  },
-  {
-    field: "nlp",
-    name: "asdfe1e",
-    responseTime: 1,
-    accuracy: 1,
-  },
-  {
-    field: "nlp",
-    name: "asdwe1",
-    responseTime: 1,
-    accuracy: 1,
-  },
-  {
-    field: "nlp",
-    name: "asafs1d",
-    responseTime: 1,
-    accuracy: 1,
-  },
-  {
-    field: "nlp",
-    name: "as123f1d",
-    responseTime: 1,
-    accuracy: 1,
-  },
-  {
-    field: "nlp",
-    name: "as134d",
-    responseTime: 1,
-    accuracy: 1,
-  },
-  {
-    field: "nlp",
-    name: "a1231sd",
-    responseTime: 1,
-    accuracy: 1,
-  },
-];

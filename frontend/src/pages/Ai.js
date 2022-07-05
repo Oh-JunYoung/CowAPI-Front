@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Title } from "../components/Component";
 import { AiTable, OneTable } from "../components/AiTable";
 import { useEffect, useState } from "react";
-import { dummyAiList } from "./AiList";
+import { getAiOne } from "../utils/Api";
 
 const Ai = () => {
   const { name } = useLocation().state;
@@ -19,11 +19,13 @@ const Ai = () => {
   });
 
   useEffect(() => {
-    setValues({
-      ...values,
-      ...dummyAiList.filter((el) => el.name === name)[0],
-    });
-  }, [name]);
+    const getAi = async () => { 
+      const data = await getAiOne(name);
+      setValues(data);
+    }
+    
+    getAi();
+  }, []);
 
   return (
     <>
