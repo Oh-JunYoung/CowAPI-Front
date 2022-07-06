@@ -12,7 +12,7 @@ const Ai = () => {
     name: "",
     responseTime: 0,
     accuracy: 0,
-    requestURI: "https://www.youtube.com",
+    requestURI: "requestURI",
     method: "GET",
     req: "req",
     res: "res",
