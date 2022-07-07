@@ -9,17 +9,20 @@ import { AiTable } from "../components/AiTable";
 import { Title } from "../components/Component";
 import { DashboardTable } from "../components/DashboardTable";
 
-const DashBoard = () => { 
+const DashBoard = () => {
   const [totalUser, setToalUser] = useState(1);
   const [todayUser, setTodayUser] = useState(1);
   const [updatedAt, setUpdatedAt] = useState(1);
-  const [aiList, setAiList] = useState({aiList : [
-    0 : {
-      name : "test",
-      responseTime : 1,
-      accuracy : 1,
-      updatedAt: 1}
-    ]});
+  const [aiList, setAiList] = useState({
+    aiList: [
+      (0: {
+        name: "test",
+        responseTime: 1,
+        accuracy: 1,
+        updatedAt: 1,
+      }),
+    ],
+  });
 
   const navigate = useNavigate();
 
@@ -30,7 +33,7 @@ const DashBoard = () => {
   }
 
   // var source = new EventSource(`${url}/dashboard`, {withCredentials: true});
-  const source = new EventSource(`http://localhost:8080/dashboard`, {withCredentials: true});
+  const source = new EventSource(`${url}/dashboard`);
 
   source.addEventListener("dashboard", async (event) => {
     const parsedData = JSON.parse(event.data);
@@ -38,7 +41,7 @@ const DashBoard = () => {
     setTodayUser(parsedData.todayUser);
     setUpdatedAt(parsedData.updatedAt);
     setAiList(parsedData.aiList);
-  })
+  });
 
   const handleClick = (name) => {
     console.log(name);
@@ -46,7 +49,7 @@ const DashBoard = () => {
 
   return (
     <>
-      <NavigationBar/>
+      <NavigationBar />
       <Title name="대시보드" />
 
       <h1>totalUser : {totalUser}</h1>
@@ -59,13 +62,12 @@ const DashBoard = () => {
           <DashboardTable aiList={aiList.aiList}></DashboardTable>
         </TableContainer>
       </Container>
-
     </>
   );
-}
+};
 
 const Container = styled.div`
-width: 100%;
+  width: 100%;
 `;
 
 const TableContainer = styled.div`
@@ -81,6 +83,5 @@ const TableTitle = styled.div`
   width: 90%;
   font-size: 40px;
 `;
-
 
 export default DashBoard;

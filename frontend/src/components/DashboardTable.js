@@ -4,27 +4,25 @@ import styled from "styled-components";
 export const DashboardTable = ({ aiList }) => {
   return (
     <Block>
-    <TableStyles>
+      <TableStyles>
         <thead>
           <tr>
-              <td>Ai</td>
-              <td>ResponseTime</td>
-              <td>Accuracy</td>
-              <td>updated time</td>
+            <td>Ai</td>
+            <td>ResponseTime</td>
+            <td>Accuracy</td>
+            <td>updated time</td>
           </tr>
         </thead>
 
         <tbody>
-            {aiList.map((ai, index) => (
-                <DashboardTr ai={ai} key = {index}/>
-            ))}
+          {aiList.map((ai, index) => (
+            <DashboardTr ai={ai} key={index} />
+          ))}
         </tbody>
-
       </TableStyles>
     </Block>
   );
 };
-
 
 const Block = styled.div`
   overflow-y: scroll;

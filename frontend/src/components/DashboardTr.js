@@ -1,10 +1,10 @@
-export const DashboardTr = ({ ai, key }) => {
+export const DashboardTr = ({ ai }) => {
   return (
-          <tr key={key}>
-            <td>{ai.name}</td>
-            <td>{ai.responseTime}</td>
-            <td>{ai.accuracy}</td>
-            <td>{ai.updatedAt}</td>
-          </tr>
+    <tr>
+      <td>{ai.name}</td>
+      <td>{ai.responseTime}</td>
+      <td>{ai.accuracy}</td>
+      <td>{ai.updatedAt}</td>
+    </tr>
   );
 };
