@@ -1,6 +1,7 @@
 // libraries
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import {Subscribe} from 'react-subscribe';
 
 // Component
 import NavigationBar from "../components/NavigationBar";
@@ -15,33 +16,35 @@ const DashBoard = () => {
   const [updatedAt, setUpdatedAt] = useState(1);
   const [aiList, setAiList] = useState({
     aiList: [
-      (0: {
+      0: {
         name: "test",
         responseTime: 1,
         accuracy: 1,
         updatedAt: 1,
-      }),
-    ],
+      },
+    ]
   });
 
   const navigate = useNavigate();
 
   const url = process.env.REACT_APP_URL;
 
-  if (localStorage.getItem("jwt") !== null) {
-    // navigate(-1);
-  }
+  useEffect(() => {
+      const f = () => {
+        const source = new EventSource(`http://localhost:8080/dashboard`);
+      
+        source.addEventListener("dashboard", async (event) => {
+          const parsedData = JSON.parse(event.data);
+          setUpdatedAt(parsedData.updatedAt);
+          setToalUser(parsedData.todayUser);
+          setTodayUser(parsedData.todayUser);
+          setAiList(parsedData.aiList);
+        });
+      };
 
-  // var source = new EventSource(`${url}/dashboard`, {withCredentials: true});
-  const source = new EventSource(`${url}/dashboard`);
 
-  source.addEventListener("dashboard", async (event) => {
-    const parsedData = JSON.parse(event.data);
-    setToalUser(parsedData.todayUser);
-    setTodayUser(parsedData.todayUser);
-    setUpdatedAt(parsedData.updatedAt);
-    setAiList(parsedData.aiList);
-  });
+      f();
+  }, {})
 
   const handleClick = (name) => {
     console.log(name);
@@ -51,6 +54,8 @@ const DashBoard = () => {
     <>
       <NavigationBar />
       <Title name="대시보드" />
+
+
 
       <h1>totalUser : {totalUser}</h1>
       <h1>todayUser : {todayUser}</h1>
