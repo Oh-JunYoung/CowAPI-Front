@@ -24,7 +24,7 @@ const Login = () => {
   const Naver = useCallback(() => {
     const naverLogin = new naver.LoginWithNaverId({
       clientId: "RJ5004rmMkQn9WqoFpw1",
-      callbackUrl: "http://localhost:3000/login",
+      callbackUrl: window.location.href,
       isPopup: false,
       loginButton: { color: "green", type: 3, height: 40 },
       callbackHandle: true,
@@ -38,30 +38,12 @@ const Login = () => {
     UserProfile();
   };
 
-  useEffect(naverLogin, [Naver, naver]);
-
-  const UserProfile = () => {
+  const UserProfile = useCallback(() => {
     window.location.href.includes("access_token") && GetUser();
     function GetUser() {
       const location = window.location.href.split("=")[1];
       const token = location.split("&")[0];
       console.log("token: ", token);
-      // fetch(`${process.env.REACT_APP_URL}/account/sign-in`, {
-      //   method: "GET",
-      //   headers: {
-      //     "Content-type": "application/json",
-      //     Authorization: token,
-      //   },
-      // })
-      //   .then((res) => res.json())
-      //   .then((res) => {
-      //     localStorage.setItem("access_token", res.token);
-      //     console.log({
-      //       nickname: res.nickname,
-      //       image: res.image,
-      //     });
-      //   })
-      //   .catch((err) => console.log("err : ", err));
       axios
         .post(
           `${process.env.REACT_APP_URL}/login/oauth/naver`,
@@ -84,7 +66,9 @@ const Login = () => {
           console.log(err);
         });
     }
-  };
+  }, [navigate]);
+
+  useEffect(naverLogin, [Naver, UserProfile, naver]);
 
   return (
     <>
