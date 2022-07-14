@@ -1,10 +1,9 @@
 const url = process.env.REACT_APP_URL;
-const localUrl = "http://localhost:8080"
 const Authorization = "Bearer " + localStorage.getItem("jwt");
 
 export const signUp = async (email, password) => {
   console.log(url);
-  const res = await fetch(localUrl + "/signup", {
+  const res = await fetch(url + "/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,7 +22,7 @@ export const signUp = async (email, password) => {
 };
 
 export const signIn = async (email, password) => {
-  const res = await fetch(localUrl + "/signin", {
+  const res = await fetch(url + "/signin", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
