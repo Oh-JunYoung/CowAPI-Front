@@ -1,7 +1,6 @@
 // libraries
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Subscribe } from "react-subscribe";
 
 // Component
 import NavigationBar from "../components/NavigationBar";
