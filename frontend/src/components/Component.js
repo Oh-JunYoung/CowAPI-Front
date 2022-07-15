@@ -82,12 +82,13 @@ export const PageContainer = (props) => {
               cur == p ? { fontWeight: "bolder" } : { fontWeight: "normal" }
             }
             onClick={(e) => {
+              const path = window.location.pathname.split("/")[1];
               if (e.target.innerText == "<<") {
-                if (start - 1 > 0) window.location.href = `./${start - 1}`;
+                if (start - 1 > 0) window.location.href = `/${path}/${start - 1}`;
               } else if (e.target.innerText == ">>") {
                 if (last + 1 <= props.last)
-                  window.location.href = `./${last + 1}`;
-              } else window.location.href = `./${e.target.innerText}`;
+                  window.location.href = `/${path}/${last + 1}`;
+              } else window.location.href = `/${path}/${e.target.innerText}`;
             }}
           >
             {p}
