@@ -4,7 +4,13 @@ import { useEffect, useState } from "react";
 
 // 공용
 export const Button = (props) => {
-  return <Btn onClick={props.func}> {props.name} </Btn>;
+  let flag = 1;
+  return <Btn onClick={() => {
+    if (flag === 1) {
+      props.func();
+      flag = 0;
+    }
+  }}> {props.name} </Btn>;
 };
 
 export const Title = (props) => {
