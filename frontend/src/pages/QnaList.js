@@ -23,7 +23,8 @@ const QnaList = () => {
         alert("게시물이 존재하지 않습니다.");
         navigate(-1);
       }
-      setLast(parseInt(data.lastPage/5)+1);
+      const one = data.lastPage % 5 === 0 ? 0 : 1;
+      setLast(parseInt(data.lastPage/5)+one);
       setList(data.qnas);
     }
     getList();
