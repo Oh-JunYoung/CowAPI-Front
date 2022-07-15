@@ -14,7 +14,8 @@ export const signUp = async (email, password) => {
     }),
   });
   if (Math.floor(res.status / 100) === 4) {
-    alert(await res.json().message);
+    const data = await res.json()
+    alert(data.message);
   } else {
     const data = await res.json();
     alert("회원가입이 완료되었습니다. 로그인 후 이용가능합니다.");
@@ -33,7 +34,8 @@ export const signIn = async (email, password) => {
     }),
   });
   if (Math.floor(res.status / 100) === 4) {
-    alert(await res.json().message);
+    const data = await res.json()
+    alert(data.message);
   } else {
     const data = await res.json();
     localStorage.setItem("jwt", data.authorization);
@@ -53,7 +55,8 @@ export const getQnaList = async (page) => {
     },
   });
   if (Math.floor(res.status / 100) === 4) {
-    alert(await res.json().message);
+    const data = await res.json()
+    alert(data.message);
   }
   const data = await res.json();
   return data;
@@ -68,7 +71,8 @@ export const getNoticeList = async (page) => {
     },
   });
   if (Math.floor(res.status / 100) === 4) {
-    alert(await res.json().message);
+    const data = await res.json()
+    alert(data.message);
   }
   const data = await res.json();
   return data;
@@ -83,7 +87,8 @@ export const getQnaDetail = async (id) => {
     },
   });
   if (Math.floor(res.status / 100) === 4) {
-    alert(await res.json().message);
+    const data = await res.json()
+    alert(data.message);
   }
   const data = await res.json();
   return data;
@@ -114,7 +119,8 @@ export const updateQna = async (id, title, content) => {
     }),
   });
   if (Math.floor(res.status / 100) === 4) {
-    alert(await res.json().message);
+    const data = await res.json()
+    alert(data.message);
   } else {
     window.location.href = "/qna-list/1";
   }
@@ -133,7 +139,8 @@ export const updateNotice = async (id, title, content) => {
     }),
   });
   if (Math.floor(res.status / 100) === 4) {
-    alert(await res.json().message);
+    const data = await res.json()
+    alert(data.message);
   } else {
     window.location.href = "/notice-list/1";
   }
@@ -152,7 +159,8 @@ export const createQna = async (title, content) => {
     }),
   });
   if (Math.floor(res.status / 100) === 4) {
-    alert(await res.json().message);
+    const data = await res.json()
+    alert(data.message);
   } else {
     window.location.href = "/qna-list/1";
   }
@@ -171,7 +179,8 @@ export const createNotice = async (title, content) => {
     }),
   });
   if (Math.floor(res.status / 100) === 4) {
-    alert(await res.json().message);
+    const data = await res.json()
+    alert(data.message);
   } else {
     window.location.href = "/notice-list/1";
   }
@@ -186,7 +195,8 @@ export const deleteQna = async (id) => {
     },
   });
   if (Math.floor(res.status / 100) === 4) {
-    alert(await res.json().message);
+    const data = await res.json()
+    alert(data.message);
   } else {
     window.location.href = "/qna-list/1";
   }
@@ -201,7 +211,8 @@ export const deleteNotice = async (id) => {
     },
   });
   if (Math.floor(res.status / 100) === 4) {
-    alert(await res.json().message);
+    const data = await res.json()
+    alert(data.message);
   } else {
     window.location.href = "/notice-list/1";
   }
@@ -231,7 +242,8 @@ export const updateMyInfo = async (password) => {
     }),
   });
   if (Math.floor(res.status / 100) === 4) {
-    alert(await res.json().message);
+    const data = await res.json()
+    alert(data.message);
   } else {
     window.location.href = "/";
   }
@@ -246,7 +258,8 @@ export const deleteMyInfo = async () => {
     },
   });
   if (Math.floor(res.status / 100) === 4) {
-    alert(await res.json().message);
+    const data = await res.json()
+    alert(data.message);
   } else {
     localStorage.clear();
     window.location.href = "/";
@@ -262,7 +275,8 @@ export const updateSecretKey = async () => {
     },
   });
   if (Math.floor(res.status / 100) === 4) {
-    alert(await res.json().message);
+    const data = await res.json()
+    alert(data.message);
   }
   const data = await res.json();
   return data;
@@ -277,7 +291,8 @@ export const getAiList = async () => {
     },
   });
   if (Math.floor(res.status / 100) === 4) {
-    alert(await res.json().message);
+    const data = await res.json()
+    alert(data.message);
   }
   const data = await res.json();
   return data;
@@ -292,10 +307,9 @@ export const getAiOne = async (name) => {
     },
   });
   if (Math.floor(res.status / 100) === 4) {
-    alert(await res.json().message);
+    const data = await res.json()
+    alert(data.message);
   }
   const data = await res.json();
   return data;
 };
-
-// spring.security.oauth2.client.registration.naver.client-id=RJ5004rmMkQn9WqoFpw1
