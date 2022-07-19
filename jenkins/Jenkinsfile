@@ -3,26 +3,28 @@ echo "---build start---"
 node {
     stage('Clone') {
         echo '>>> Git repository Clone'
-        git branch: 'main', credentialsId: 'qawesdxc@naver.com' , url: "git@github.com:Oh-JunYoung/CowAPI-Front.git"
+        git branch: 'main', credentialsId: '6b0913f3-9133-41d9-bbf1-1c0baaafb86b' , url: "git@github.com:Oh-JunYoung/CowAPI-Front.git"
     }
 
     stage('Move to Path') {
         echo '>>> Move to Deploy Path'
-        sh 'sudo ./jenkins/MovePath.sh'
+        sh './jenkins/MovePath.sh'
     }
 
     stage('Pull') {
         echo '>>> Git repository Clone'
-        sh 'sudo ./jenkins/GitPull.sh'
+        sh './jenkins/GitPull.sh'
     }
 
     stage('Build') {
         echo '>>> Gradle project Build'
-        sh 'sudo ./jenkins/Build.sh'
+        nodejs('nodejs-16.16.0') {
+            sh './jenkins/Build.sh'
+        }
     }
 
     stage('Nginx') {
         echo '>>> Gradle project Deploy'
-        sh 'sudo ./jenkins/Nginx.sh'
+        sh './jenkins/Nginx.sh'
     }
 }
