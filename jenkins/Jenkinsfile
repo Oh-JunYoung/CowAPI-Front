@@ -3,7 +3,7 @@ echo "---build start---"
 node {
     stage('Clone') {
         echo '>>> Git repository Clone'
-        git branch: 'feature/Jenkins', credentialsId: '6b0913f3-9133-41d9-bbf1-1c0baaafb86b' , url: "git@github.com:Oh-JunYoung/CowAPI-Front.git"
+        git branch: 'main', credentialsId: '6b0913f3-9133-41d9-bbf1-1c0baaafb86b' , url: "git@github.com:Oh-JunYoung/CowAPI-Front.git"
     }
 
     stage('Move to Path') {
