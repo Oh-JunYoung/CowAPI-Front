@@ -16,6 +16,11 @@ node {
         sh './jenkins/GitPull.sh'
     }
 
+    stage('Intall npm') {
+        echo '>>> npm install start'
+        sh './jenkins/NpmInstall.sh'
+    }
+
     stage('Build') {
         echo '>>> Gradle project Build'
         sh './jenkins/Build.sh'
