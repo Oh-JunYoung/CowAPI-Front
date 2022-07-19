@@ -5,4 +5,5 @@ BUILD_PATH=/home/ec2-user/jenkins/CowAPI-Front/frontend
 echo ">>> Project Build"
 cd $BUILD_PATH
 
+pwd
 npm run build
