@@ -8,21 +8,21 @@ node {
 
     stage('Move to Path') {
         echo '>>> Move to Deploy Path'
-        sh 'sudo ./jenkins/MovePath.sh'
+        sudo sh './jenkins/MovePath.sh'
     }
 
     stage('Pull') {
         echo '>>> Git repository Clone'
-        sh 'sudo ./jenkins/GitPull.sh'
+        sudo sh './jenkins/GitPull.sh'
     }
 
     stage('Build') {
         echo '>>> Gradle project Build'
-        sh 'sudo ./jenkins/Build.sh'
+        sudo sh './jenkins/Build.sh'
     }
 
     stage('Nginx') {
         echo '>>> Gradle project Deploy'
-        sh 'sudo ./jenkins/Nginx.sh'
+        sudo sh './jenkins/Nginx.sh'
     }
 }
