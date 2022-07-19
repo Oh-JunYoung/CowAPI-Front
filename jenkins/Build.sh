@@ -6,4 +6,5 @@ echo ">>> Project Build"
 cd $BUILD_PATH
 
 pwd
+npm install
 npm run build
