@@ -5,9 +5,9 @@ node {
     //     echo '>>> Git repository Clone'
     //     git branch: 'feature/Jenkins', credentialsId: 'git' , url: "git@github.com:Oh-JunYoung/CowAPI-Front.git"
     // }
-
     stage('Move to Path') {
         echo '>>> Move to Deploy Path'
+        sh "who am i"
         sh './jenkins/MovePath.sh'
     }
 
