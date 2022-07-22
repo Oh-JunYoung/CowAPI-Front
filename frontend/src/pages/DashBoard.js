@@ -5,11 +5,8 @@ import { useNavigate, useParams } from "react-router-dom";
 // Component
 import NavigationBar from "../components/NavigationBar";
 import styled, { css } from "styled-components";
-import { AiTable } from "../components/AiTable";
-import { Title } from "../components/Component";
 import { DashboardTable } from "../components/DashboardTable";
 import PageTitle from "../components/share/PageTitle";
-import StyledTable from "../components/share/StyledTable";
 import { colors } from "../styles/colors";
 
 const DashBoard = () => {

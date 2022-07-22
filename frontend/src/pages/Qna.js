@@ -98,7 +98,6 @@ const Qna = () => {
                     createQna(title, content);
                   }}
                 />
-                <div style={{ width: "100px" }} />
               </>
             )}
           </RowBox>

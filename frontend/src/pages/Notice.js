@@ -72,7 +72,7 @@ const Notice = () => {
         <Container>
           <RowBox>
             <TextDiv fontSize={30} bold margin="0 auto 0 0">
-              Notice
+              공지사항
             </TextDiv>
             {id != -1 ? (
               email == userEmail ? (
@@ -102,7 +102,6 @@ const Notice = () => {
                     createNotice(title, content);
                   }}
                 />
-                <div style={{ width: "100px" }} />
               </>
             )}
           </RowBox>

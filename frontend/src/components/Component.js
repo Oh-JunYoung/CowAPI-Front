@@ -25,6 +25,7 @@ export const Title = (props) => {
 };
 
 export const ButtonContainer = styled.div`
+  border: 1px solid red;
   display: flex;
   justify-content: ${(props) => props.justify};
 `;
@@ -50,6 +51,7 @@ export const RowBox = styled.div`
 `;
 
 export const TextDiv = styled.div`
+  display: flex;
   font-size: ${({ fontSize }) => fontSize}px;
   margin: ${({ margin }) => margin};
   ${({ bold }) =>
@@ -62,6 +64,10 @@ export const TextDiv = styled.div`
     css`
       cursor: pointer;
     `}
+  &.goldText {
+    color: ${colors.goldColor};
+    font-weight: bold;
+  }
 `;
 
 export const SideBar = styled.div`
@@ -136,6 +142,7 @@ export const DetailContainer = (props) => {
     <ModifyContainer>
       <InputContainer>
         <InputBox
+          placeholder="제목을 입력하세요."
           value={props.title}
           readOnly={props.readOnly}
           onChange={(e) => {
@@ -143,14 +150,17 @@ export const DetailContainer = (props) => {
           }}
         />
       </InputContainer>
-      {props.updatedAt && (
+      {props.updatedAt ? (
         <InputContainer>
           <TextDiv margin="43px 0">{props.updatedAt.substring(0, 13)}</TextDiv>
         </InputContainer>
+      ) : (
+        <div style={{ margin: "20px" }} />
       )}
 
       <InputContainer>
         <ContentBox
+          placeholder="본문을 적어주세요."
           value={props.content}
           readOnly={props.readOnly}
           onChange={(e) => {
@@ -166,27 +176,27 @@ export const DetailContainer = (props) => {
 export const MyPageContainer = (props) => {
   return (
     <>
-      <InputContainer>
-        <TextBox>email</TextBox>
-        <ReadOnlyBox>{props.email}</ReadOnlyBox>
-      </InputContainer>
-      <InputContainer>
-        <TextBox>password</TextBox>
-        <InputBox
-          onChange={(e) => {
-            props.setPassword(e.target.value);
-          }}
-        />
-      </InputContainer>
-      <div style={{ height: "100px" }} />
-      <InputContainer>
-        <TextBox>가입날짜</TextBox>
-        <ReadOnlyBox>{props.createdAt.substr(0, 10)}</ReadOnlyBox>
-      </InputContainer>
-      <InputContainer>
-        <TextBox>★ Secret key</TextBox>
-        <ReadOnlyBox>{props.secretKey}</ReadOnlyBox>
-      </InputContainer>
+      {props.tab === "userInfo" ? (
+        <>
+          <TextBox>이메일</TextBox>
+          <ReadOnlyBox>{props.email}</ReadOnlyBox>
+          <TextBox>비밀번호</TextBox>
+          <InputBox
+            onChange={(e) => {
+              props.setPassword(e.target.value);
+            }}
+          />
+          <InputContainer>
+            <TextBox>가입날짜</TextBox>
+            <ReadOnlyBox>{props.createdAt.substr(0, 10)}</ReadOnlyBox>
+          </InputContainer>
+        </>
+      ) : (
+        <InputContainer>
+          <TextBox>★ Secret key</TextBox>
+          <ReadOnlyBox>{props.secretKey}</ReadOnlyBox>
+        </InputContainer>
+      )}
     </>
   );
 };

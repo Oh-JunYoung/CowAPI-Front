@@ -18,7 +18,7 @@ const NavigationBar = () => {
           </ButtonDiv>
           <ButtonDiv
             navi
-            bold={location === "/ai"}
+            bold={location.substring(0, 3) === "/ai"}
             onClick={() => (user === 1 ? navigate("/ai") : navigate("/login"))}
           >
             AI
@@ -27,20 +27,31 @@ const NavigationBar = () => {
           <ButtonDiv
             navi
             onClick={() => navigate("/notice-list/1")}
-            bold={location === "/notice-list/"}
+            bold={
+              location.substring(0, 13) === "/notice-list/" ||
+              location.substring(0, 10) === "/qna-list/"
+            }
           >
             Support
           </ButtonDiv>
-
-          <ButtonDiv
-            navi
-            onClick={() => {
-              localStorage.clear();
-              navigate("/");
-            }}
-          >
-            Log Out
-          </ButtonDiv>
+          {user === 1 ? (
+            // <ButtonDiv
+            //   navi
+            //   onClick={() => {
+            //     localStorage.clear();
+            //     navigate("/");
+            //   }}
+            // >
+            //   Log Out
+            // </ButtonDiv>
+            <ButtonDiv navi onClick={() => navigate("/mypage")}>
+              MyPage
+            </ButtonDiv>
+          ) : (
+            <ButtonDiv navi onClick={() => navigate("/login")}>
+              Login
+            </ButtonDiv>
+          )}
         </NaviContainer>
       </Wrapper>
     </HeaderContainer>

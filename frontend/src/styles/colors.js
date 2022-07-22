@@ -2,7 +2,7 @@ export const colors = {
   //default
   whiteColor: "#fff",
   blackColor: "#000",
-
+  goldColor: "#FFA113",
   //background
   blueColor: "#0067C6",
   lightBlueColor: "#E4EEF8",
