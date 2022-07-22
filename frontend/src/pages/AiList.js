@@ -5,7 +5,8 @@ import styled from "styled-components";
 import { AiTable } from "../components/AiTable";
 import { useNavigate } from "react-router-dom";
 import { getAiList } from "../utils/Api";
-
+import PageTitle from "../components/share/PageTitle";
+// import arrow from "../assets/arrow.png";
 const AiList = () => {
   const [values, setValues] = useState({
     vision: [],
@@ -14,13 +15,13 @@ const AiList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getAis = async () => { 
+    const getAis = async () => {
       const data = await getAiList();
       setValues({
         vision: data.aiList.filter((el) => el.field === "vision"),
         nlp: data.aiList.filter((el) => el.field === "nlp"),
       });
-    }
+    };
 
     getAis();
   }, []);
@@ -32,15 +33,15 @@ const AiList = () => {
   return (
     <>
       <NavigationBar />
-      <Title name="AI" />
+      <PageTitle title="AI" />
       <Container>
         <TableContainer>
           <TableTitle>Computer Vision</TableTitle>
-          <AiTable lists={values.vision} handleClick={handleClick} />
+          <AiTable HOVER lists={values.vision} handleClick={handleClick} />
         </TableContainer>
         <TableContainer>
           <TableTitle>NLP</TableTitle>
-          <AiTable lists={values.nlp} handleClick={handleClick} />
+          <AiTable HOVER lists={values.nlp} handleClick={handleClick} />
         </TableContainer>
       </Container>
     </>
@@ -49,20 +50,24 @@ const AiList = () => {
 
 const Container = styled.div`
   width: 100%;
-`;
-
-const TableContainer = styled.div`
-  margin-top: 100px;
-  width: 100%;
-  height: 30vh;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
+const TableContainer = styled.div`
+  margin-top: 60px;
+  width: 1024px;
+  display: flex;
+  flex-direction: column;
+`;
+
 const TableTitle = styled.div`
-  width: 90%;
-  font-size: 40px;
+  width: 1024px;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
 `;
 
 export default AiList;

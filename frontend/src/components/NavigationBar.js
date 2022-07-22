@@ -1,53 +1,95 @@
-import { useLocation } from "react-router-dom";
-import styled from "styled-components";
-
-const NavigationBar = () => { 
+import { useLocation, useNavigate } from "react-router-dom";
+import styled, { css } from "styled-components";
+import { colors } from "../styles/colors";
+const NavigationBar = () => {
+  const navigate = useNavigate();
   const user = localStorage.getItem("jwt") === null ? 0 : 1;
-  const prefix = useLocation().pathname.split("/").length === 3 ? '../' : ''; // path에 따라 이미지 상대경로 설정
+  const location = useLocation().pathname;
+  const prefix = useLocation().pathname.split("/").length === 3 ? "../" : ""; // path에 따라 이미지 상대경로 설정
   return (
-    <NavContainer>
-      <LogoContainer>
-        <img src={`${prefix}logo.png`} alt="logo" onClick={() => { window.location.href = "/"}} />
-        <img src={`${prefix}domain.png`} alt="domain" onClick={() => { window.location.href = "/" }} />
-      </LogoContainer>
-      <LogoContainer>
-        <Icons src={`${prefix}dashboard.png`} onClick={() => { window.location.href = "/" }} />
-        {user === 1 ? <Icons src={`${prefix}ai.png`} onClick={() => { window.location.href = "/ai" }} /> : <></>}
-        {user === 1 ? <Icons src={`${prefix}notice.png`} onClick={() => { window.location.href = "/notice-list/1" }} /> : <></>}
-        {user === 1 ? <Icons src={`${prefix}qna.png`} onClick={() => { window.location.href = "/qna-list/1" }} /> : <></>}
-        <Icons src={`${prefix}mypage.png`} onClick={() => { 
-          const path = user === 1 ? "/mypage" : "/login";
-          window.location.href = path;
-        } } />
-        <Icons src={`${prefix}exit.png`} onClick={() => { 
-          localStorage.clear();
-          window.location.href = "/";
-        } } />
-      </LogoContainer>
-    </NavContainer>
+    <HeaderContainer>
+      <Wrapper>
+        <ButtonDiv fontSize={30} onClick={() => navigate("/")}>
+          Cow API
+        </ButtonDiv>
+        <NaviContainer>
+          <ButtonDiv navi onClick={() => navigate("/")} bold={location === "/"}>
+            Home
+          </ButtonDiv>
+          <ButtonDiv
+            navi
+            bold={location === "/ai"}
+            onClick={() => (user === 1 ? navigate("/ai") : navigate("/login"))}
+          >
+            AI
+          </ButtonDiv>
+
+          <ButtonDiv
+            navi
+            onClick={() => navigate("/notice-list/1")}
+            bold={location === "/notice-list/"}
+          >
+            Support
+          </ButtonDiv>
+
+          <ButtonDiv
+            navi
+            onClick={() => {
+              localStorage.clear();
+              navigate("/");
+            }}
+          >
+            Log Out
+          </ButtonDiv>
+        </NaviContainer>
+      </Wrapper>
+    </HeaderContainer>
   );
-}
+};
 
 export default NavigationBar;
 
-const NavContainer = styled.div`
-  display : flex;
-  flex-direction : row;
-  justify-content: space-between;
-  height: 100px;
-  width : 100vw;
-  background-color: rgba(242,205,177);
-  padding: 0px;
-  margin: 0px;
+const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 70px;
+  width: 100%;
+  background-color: ${colors.whiteColor};
 `;
 
-const LogoContainer = styled.div`
-  display : flex;
-  padding : 20px;
-`
+const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1024px;
+  @media only screen and (max-width: 1024px) {
+    padding: 0 20px;
+  }
+`;
 
-const Icons = styled.img`
-    width: 40px;
-    height: 40px;
-    margin : 10px;
+const NaviContainer = styled.div`
+  display: flex;
+  height: 100%;
+  align-items: center;
+`;
+
+const ButtonDiv = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : 16)}px;
+  font-weight: bold;
+  cursor: pointer;
+  ${({ bold }) =>
+    bold &&
+    css`
+      color: ${colors.blueColor};
+      font-weight: 800;
+    `}
+  ${({ navi }) =>
+    navi &&
+    css`
+      margin: 0 10px;
+      padding: 0 10px;
+    `}
 `;

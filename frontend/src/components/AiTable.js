@@ -1,21 +1,31 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { colors } from "../styles/colors";
 
-export const AiTable = ({ lists, handleClick }) => {
+export const AiTable = ({
+  HOVER,
+  margin = "25px 0 0 0",
+  lists,
+  handleClick,
+}) => {
   return (
-    <Block>
+    <Block margin={margin}>
       <TableStyles>
         <thead>
           <tr>
             <th>AI</th>
-            <th>Response Time (ms)</th>
-            <th>Accuracy</th>
+            <th>응답시간</th>
+            <th>정확도</th>
           </tr>
         </thead>
         <tbody>
           {lists.map((el, index) => (
-            <tr key={index} onClick={() => handleClick(el.name)}>
+            <tr
+              className={HOVER && "navi"}
+              key={index}
+              onClick={() => handleClick(el.name)}
+            >
               <td>{el.name}</td>
-              <td>{el.responseTime}</td>
+              <td>{el.responseTime} ms</td>
               <td>{el.accuracy}</td>
             </tr>
           ))}
@@ -26,38 +36,45 @@ export const AiTable = ({ lists, handleClick }) => {
 };
 
 const Block = styled.div`
-  overflow-y: scroll;
-  max-height: 162px;
-  height: 100%;
-  width: 90%;
-  margin-top: 18px;
+  width: 1024px;
+  margin: ${({ margin }) => margin};
 `;
 
 const TableStyles = styled.table`
   width: 100%;
   border-collapse: collapse;
-  background-color: #f8f8f8;
-
+  margin: ${({ margin }) => margin};
   thead {
-    position: sticky;
-    top: 0;
-    background-color: #f8f8f8;
+    background-color: ${colors.lightGrayColor};
+    border-top: 1px solid ${colors.grayBolderColor};
+    border-bottom: 0.5px solid ${colors.grayBolderColor};
   }
-
+  thead > tr > td {
+    font-weight: 600;
+  }
+  tbody > tr {
+    height: 68px;
+    &.navi {
+      cursor: pointer;
+      :hover {
+        background-color: ${colors.lightGrayColor};
+      }
+    }
+  }
   th,
   td {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    border-bottom: 1px solid ${colors.lightGrayBolderColor};
   }
 
   th {
-    color: #464646;
+    color: ${colors.fontDarkGrayColor};
     font-size: 14px;
     align-items: center;
     justify-content: center;
-    font-weight: 400;
+    font-weight: 500;
     flex: 1;
   }
 
@@ -67,20 +84,18 @@ const TableStyles = styled.table`
   }
   td {
     flex: 1;
-    background-color: #fff;
     font-size: 14px;
     color: #464646;
     align-items: center;
     display: flex;
     justify-content: center;
     font-weight: 400;
-    /* border-bottom: 1px solid #ececec; */
   }
 `;
 
 export const OneTable = (props) => {
   return (
-    <Block>
+    <Block margin="-1px 0 50px 0">
       <TableStyles>
         <thead>
           <tr>
@@ -92,6 +107,37 @@ export const OneTable = (props) => {
           <tr>
             <td>{props.requestURI}</td>
             <td>{props.method}</td>
+          </tr>
+        </tbody>
+      </TableStyles>
+    </Block>
+  );
+};
+
+export const OneColumnTable = (props) => {
+  return (
+    <Block>
+      <TableStyles>
+        <thead>
+          <tr>
+            <th>요청</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{props.req}</td>
+          </tr>
+        </tbody>
+      </TableStyles>
+      <TableStyles margin="-0.5px 0 0 0">
+        <thead>
+          <tr>
+            <th>응답</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{props.res}</td>
           </tr>
         </tbody>
       </TableStyles>

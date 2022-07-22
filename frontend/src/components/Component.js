@@ -1,16 +1,23 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { colors } from "../styles/colors";
 
 // 공용
 export const Button = (props) => {
   let flag = 1;
-  return <Btn onClick={() => {
-    if (flag === 1) {
-      props.func();
-      flag = 0;
-    }
-  }}> {props.name} </Btn>;
+  return (
+    <Btn
+      onClick={() => {
+        if (flag === 1) {
+          props.func();
+          flag = 0;
+        }
+      }}
+    >
+      {" "}
+      {props.name}{" "}
+    </Btn>
+  );
 };
 
 export const Title = (props) => {
@@ -20,18 +27,48 @@ export const Title = (props) => {
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: ${(props) => props.justify};
-  margin-top: 20px;
-  min-height: 38px;
 `;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
   margin-left: 40px;
   margin-right: 40px;
-  margin-bottom: 20px;
-  height: 70vh;
+  height: 100%;
+`;
+export const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const RowBox = styled.div`
+  display: flex;
+  align-items: flex-end;
+  margin: 113px 0 20px 0;
+  width: 100%;
+`;
+
+export const TextDiv = styled.div`
+  font-size: ${({ fontSize }) => fontSize}px;
+  margin: ${({ margin }) => margin};
+  ${({ bold }) =>
+    bold &&
+    css`
+      font-weight: bold;
+    `}
+  ${({ pointer }) =>
+    pointer &&
+    css`
+      cursor: pointer;
+    `}
+`;
+
+export const SideBar = styled.div`
+  width: 263px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 113px;
 `;
 
 // qna, notice 리스트
@@ -39,12 +76,6 @@ export const BoardContainer = (props) => {
   const navigate = useNavigate();
   return (
     <Bd>
-      <One style={{ height: "10%" }}>
-        <QnaNo>No.</QnaNo>
-        <QnaTitle>제목</QnaTitle>
-        <QnaDate>날짜</QnaDate>
-        <QnaUser>사용자</QnaUser>
-      </One>
       {props.list.map((li) => {
         return (
           <One
@@ -53,10 +84,9 @@ export const BoardContainer = (props) => {
               navigate(`/${props.path}/${li.id}`);
             }}
           >
-            <QnaNo>{li.id}</QnaNo>
             <QnaTitle>{li.title}</QnaTitle>
-            <QnaDate>{li.updatedAt.substr(0, 10)}</QnaDate>
-            <QnaUser>{li.email}</QnaUser>
+            <QnaContent>{li.content}</QnaContent>
+            <QnaDate>{li.updatedAt.substring(0, 13)}</QnaDate>
           </One>
         );
       })}
@@ -73,7 +103,7 @@ export const PageContainer = (props) => {
   for (let i = start; i <= last; i++) arr.push(i);
   arr.push(">>");
   return (
-    <ButtonContainer justify="space-around">
+    <ButtonContainer justify="center">
       {arr.map((p) => {
         return (
           <PageNo
@@ -84,7 +114,8 @@ export const PageContainer = (props) => {
             onClick={(e) => {
               const path = window.location.pathname.split("/")[1];
               if (e.target.innerText == "<<") {
-                if (start - 1 > 0) window.location.href = `/${path}/${start - 1}`;
+                if (start - 1 > 0)
+                  window.location.href = `/${path}/${start - 1}`;
               } else if (e.target.innerText == ">>") {
                 if (last + 1 <= props.last)
                   window.location.href = `/${path}/${last + 1}`;
@@ -102,9 +133,8 @@ export const PageContainer = (props) => {
 // detail
 export const DetailContainer = (props) => {
   return (
-    <>
+    <ModifyContainer>
       <InputContainer>
-        <TextBox>제목</TextBox>
         <InputBox
           value={props.title}
           readOnly={props.readOnly}
@@ -113,8 +143,13 @@ export const DetailContainer = (props) => {
           }}
         />
       </InputContainer>
+      {props.updatedAt && (
+        <InputContainer>
+          <TextDiv margin="43px 0">{props.updatedAt.substring(0, 13)}</TextDiv>
+        </InputContainer>
+      )}
+
       <InputContainer>
-        <TextBox>내용</TextBox>
         <ContentBox
           value={props.content}
           readOnly={props.readOnly}
@@ -123,7 +158,7 @@ export const DetailContainer = (props) => {
           }}
         />
       </InputContainer>
-    </>
+    </ModifyContainer>
   );
 };
 
@@ -157,91 +192,88 @@ export const MyPageContainer = (props) => {
 };
 
 const Btn = styled.div`
+  height: 39px;
+  width: 61px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 36px;
-  width: 150px;
-  border: black 1px solid;
-  font-size: 25px;
+  margin-left: auto;
+  border-radius: 3px;
+  background-color: ${colors.blackColor};
+  color: ${colors.whiteColor};
+  font-size: 16px;
+  cursor: pointer;
+
+  :hover {
+    background-color: ${colors.hoverBlackColor};
+  }
 `;
 
 const Tit = styled.div`
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   font-size: 40px;
-  /* width: 100px; */
   margin-top: 20px;
   margin-left: 20px;
 `;
 
 const Bd = styled.div`
-  //border: black 1px solid;
-  height: 70%;
+  width: 689px;
+  border-top: 2px solid ${colors.normalGrayBorderColor};
 `;
 
 const One = styled.div`
+  height: 180px;
+  width: calc(100% - 20px);
   display: flex;
-  flex-direction: row;
-  height: 18%;
-  margin-top: -1px;
-`;
-
-const QnaNo = styled.div`
-  display: flex;
+  padding-left: 20px;
   flex-direction: column;
-  justify-content: center;
-  border: black 1px solid;
-  width: 10%;
-  text-align: center;
-  font-size: x-large;
-  margin-left: -1px;
+  border-bottom: 2px solid ${colors.lightGrayBolderColor};
+  cursor: pointer;
+  :hover {
+    background-color: ${colors.lightGrayColor};
+  }
 `;
 
 const QnaTitle = styled.div`
+  width: 70%;
+  height: 60px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border: black 1px solid;
-  width: 50%;
-  text-align: center;
-  font-size: x-large;
-  margin-left: -1px;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+`;
+
+const QnaContent = styled.div`
+  width: 70%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
 `;
 
 const QnaDate = styled.div`
+  width: 70%;
+  height: 60px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border: black 1px solid;
-  width: 20%;
-  text-align: center;
-  font-size: x-large;
-  margin-left: -1px;
-`;
-
-const QnaUser = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border: black 1px solid;
-  width: 20%;
-  text-align: center;
-  font-size: x-large;
-  margin-left: -1px;
-  margin-right: -1px;
+  align-items: center;
+  font-size: 12px;
 `;
 
 const PageNo = styled.div`
   font-size: x-large;
   margin: 10px;
+  cursor: pointer;
+`;
+
+const ModifyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 690px;
 `;
 
 const InputContainer = styled.div`
   display: flex;
-  justify-content: space-around;
-  margin: 20px;
 `;
 
 const TextBox = styled.div`
@@ -249,7 +281,12 @@ const TextBox = styled.div`
   font-size: 30px;
 `;
 const InputBox = styled.input`
-  width: 70%;
+  width: 100%;
+  height: 85px;
+  padding-left: 20px;
+  font-size: 30px;
+  border-radius: 3px;
+  border: 1px solid ${colors.lightGrayBolderColor};
 `;
 
 const ReadOnlyBox = styled.div`
@@ -259,6 +296,11 @@ const ReadOnlyBox = styled.div`
 `;
 
 const ContentBox = styled.textarea`
-  width: 70%;
+  resize: none;
+  width: 100%;
   height: 300px;
+  padding: 20px;
+  font-size: 14px;
+  border-radius: 3px;
+  border: 1px solid ${colors.lightGrayBolderColor};
 `;
